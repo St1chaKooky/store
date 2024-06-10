@@ -6,28 +6,28 @@ const textTheme = TextTheme(
     color: ColorCollection.text,
     fontFamily: 'Roboto-Regular',
     fontWeight: FontWeight.w500,
-    fontSize: 22,
+    fontSize: 14,
   ),
   titleMedium: TextStyle(
     color: ColorCollection.text,
 
     fontFamily: 'Roboto-Medium',
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
   ),
   titleSmall: TextStyle(
     color: ColorCollection.text,
 
     fontFamily: 'Roboto-Medium',
     fontWeight: FontWeight.w500,
-    fontSize: 14,
+    fontSize: 12,
   ),
   labelLarge: TextStyle(
     color: ColorCollection.text,
 
     fontFamily: 'Roboto-Medium',
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    fontSize: 13,
   ),
   labelMedium: TextStyle(
     color: ColorCollection.text,

@@ -23,8 +23,8 @@ class _AuthScreenState extends State<AuthScreen> {
             dividerColor: ColorCollection.input,
             unselectedLabelColor: ColorCollection.text,
             labelColor: ColorCollection.primary,
-            labelStyle: theme.titleSmall,
-            unselectedLabelStyle: theme.titleSmall,
+            labelStyle: theme.titleLarge,
+            unselectedLabelStyle: theme.titleLarge,
             tabs: const [
               Tab(
                 text: 'Войти',

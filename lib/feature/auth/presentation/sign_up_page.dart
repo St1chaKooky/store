@@ -1,6 +1,8 @@
 import 'package:fake_store/core/feature/button_big.dart';
 import 'package:fake_store/core/feature/input.dart';
+import 'package:fake_store/core/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -22,7 +24,10 @@ class SignUpPage extends StatelessWidget {
         MyTextField(textEditingController: TextEditingController(), labelText: 'Повторите пароль', isPassword: true,),
         const SizedBox(height: 15,),
 
-        MyFilledButton(onTap: () {  }, text: 'Войти',),
+        MyFilledButton(onTap: () {
+          context.go(RouteList.product);
+
+          }, text: 'Войти',),
 
         ],),
       ),
