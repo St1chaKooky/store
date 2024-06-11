@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:fake_store/feature/product/data/models/product_item.dart';
 
@@ -14,10 +13,15 @@ abstract class ProductRepo {
   @GET('/products/{id}')
   Future<Product> getProductItem(@Path('id') int id);
 
-  @GET('products?limit={count}')
-  Future<Product> getAllProductsLimit(@Path('count') int count);
+  @GET('products')
+  Future<List<Product>> getAllProductsLimit(
+    @Query('limit') int count,
+  );
 
   @GET('products/category/{category}')
-  Future<Product> getProductsCategory(@Path('category') String category);
-
+  Future<List<Product>> getProductsCategory(
+    @Path('category') String category,
+    @Query('limit') int count,
+    
+    );
 }

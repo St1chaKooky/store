@@ -53,8 +53,8 @@ class _ProductRepo implements ProductRepo {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Product>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Product>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -75,20 +75,20 @@ class _ProductRepo implements ProductRepo {
   }
 
   @override
-  Future<Product> getAllProductsLimit(int count) async {
+  Future<List<Product>> getAllProductsLimit(int count) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': count};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Product>(Options(
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Product>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'products?limit=${count}',
+              'products',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -97,18 +97,23 @@ class _ProductRepo implements ProductRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Product.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => Product.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
   @override
-  Future<Product> getProductsCategory(String category) async {
+  Future<List<Product>> getProductsCategory(
+    String category,
+    int count,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': count};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Product>(Options(
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Product>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -124,7 +129,9 @@ class _ProductRepo implements ProductRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Product.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => Product.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

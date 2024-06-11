@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 const textTheme = TextTheme(
   titleLarge: TextStyle(
-    color: ColorCollection.text,
+    color: Color.fromARGB(255, 42, 42, 42),
     fontFamily: 'Roboto-Regular',
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
   ),
   titleMedium: TextStyle(
     color: ColorCollection.text,
@@ -20,7 +20,7 @@ const textTheme = TextTheme(
 
     fontFamily: 'Roboto-Medium',
     fontWeight: FontWeight.w500,
-    fontSize: 12,
+    fontSize: 14,
   ),
   labelLarge: TextStyle(
     color: ColorCollection.text,
