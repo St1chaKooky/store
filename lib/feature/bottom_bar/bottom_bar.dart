@@ -16,31 +16,35 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: showBottomBar ? null :  BottomNavigationBar(
-        
-        backgroundColor: ColorCollection.white,
-        selectedItemColor: ColorCollection.primary,
-        unselectedLabelStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-              color: ColorCollection.bottomBar,
+      bottomNavigationBar: showBottomBar
+          ? null
+          : BottomNavigationBar(
+              backgroundColor: ColorCollection.white,
+              selectedItemColor: ColorCollection.primary,
+              unselectedLabelStyle:
+                  Theme.of(context).textTheme.labelMedium!.copyWith(
+                        color: ColorCollection.bottomBar,
+                      ),
+              selectedLabelStyle:
+                  Theme.of(context).textTheme.labelMedium!.copyWith(
+                        color: ColorCollection.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home_outlined), label: 'Главная'),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart_outlined),
+                  label: 'Корзина',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle_outlined),
+                  label: 'Аккаунт',
+                )
+              ],
+              currentIndex: navigationShell.currentIndex,
+              onTap: (int index) => _onTap(context, index),
             ),
-        selectedLabelStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-              color: ColorCollection.primary,
-              fontWeight: FontWeight.w600,
-            ),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              
-              icon: Icon(Icons.home_outlined),
-              label: 'Главная'),
-          BottomNavigationBarItem(
-              
-              icon:  Icon(Icons.shopping_cart_outlined),
-              label: 'Корзина',)
-    
-        ],
-        currentIndex: navigationShell.currentIndex,
-        onTap: (int index) => _onTap(context, index),
-      ),
     );
   }
 

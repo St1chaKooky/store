@@ -1,5 +1,5 @@
 import 'package:fake_store/core/router/router.dart';
-import 'package:fake_store/feature/product/data/models/product_item.dart';
+import 'package:fake_store/feature/product/data/product_item.dart';
 import 'package:fake_store/theme/collections/colorCollection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

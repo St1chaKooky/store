@@ -12,13 +12,14 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   TextTheme get theme => Theme.of(context).textTheme;
-
+  
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ColorCollection.background,
           bottom: TabBar(
             dividerColor: ColorCollection.input,
             unselectedLabelColor: ColorCollection.text,

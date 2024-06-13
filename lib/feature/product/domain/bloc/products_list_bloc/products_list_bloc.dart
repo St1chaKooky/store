@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:fake_store/feature/product/data/models/product_item.dart';
+import 'package:fake_store/feature/product/data/product_item.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_event.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_state.dart';
 import 'package:fake_store/feature/product/domain/service/product_repo.dart';
