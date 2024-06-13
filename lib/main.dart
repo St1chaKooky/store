@@ -1,6 +1,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:fake_store/core/router/router.dart';
+import 'package:fake_store/feature/account/domain/bloc/user_bloc.dart';
+import 'package:fake_store/feature/account/domain/repo/user_repo.dart';
 import 'package:fake_store/feature/auth/repository/bloc/bloc/auth_bloc.dart';
 import 'package:fake_store/feature/auth/repository/service/auth_repo.dart';
 import 'package:fake_store/feature/product/domain/bloc/filter_category_bloc/filter_bloc.dart';
@@ -16,6 +18,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiRepositoryProvider(
     providers: [
+      BlocProvider(create: (context)=> UserBloc(repo:UserRepo(Dio()) ) ),
       BlocProvider(create: (context)=> AuthBloc(repo:AuthRepo(Dio()) ) ),
       BlocProvider(create: (context)=> FilterBloc(repo:ProductRepo(Dio()) ) ),
       BlocProvider(create: (context)=> ProductsListBloc(repo:ProductRepo(Dio()) ) ),

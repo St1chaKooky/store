@@ -12,6 +12,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthRepo repo;
   AuthBloc({required this.repo}) : super(AuthLoading()) {
+    int currentId;
     on<Login>(
       (event, emit) async {
         try {
@@ -35,15 +36,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           username: event.username,
           password: event.password,
         );
-        var responseId = await repo.signUp(user);
-        log(responseId.toString());
+        Map<String, dynamic> responseId = await repo.signUp(user);
+        
+        int? id = int.tryParse(responseId['id']!.toString());
+        id != null ? currentId = id : currentId = -1;
+        log(currentId.toString());
         emit(Succes());
-        } catch (e){
-        log(e.toString());
+        } catch (e, st){
+        log(e.toString(), error: e, stackTrace: st);
 
           emit(Error(errorText: 'Повторите попытку позже'));
         }
       },
     );
+    
   }
 }

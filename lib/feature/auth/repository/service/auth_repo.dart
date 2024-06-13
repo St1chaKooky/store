@@ -14,20 +14,7 @@ abstract class AuthRepo {
   );
 
   @POST('/users')
-  Future<int> signUp(
+  Future<Map<String, dynamic>> signUp(
     @Body() UserModel user
-  );
-  @PUT('/users/{id}')
-  Future<UserModel> upadateUser(
-    @Path('id') String id,
-    @Body() UserModel user
-  );
-  @DELETE('/users/{id}')
-  Future<void> deleteUser(
-    @Path('id') String id,
-  );
-  @GET('/users/{id}')
-  Future<UserModel> getUser(
-    @Path('id') String id,
   );
 }
