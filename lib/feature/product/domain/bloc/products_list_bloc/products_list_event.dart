@@ -1,11 +1,8 @@
 sealed class ProductsListEvent {}
 
-class PaginationProducts extends ProductsListEvent {}
-
-class GetCategoriesProducts extends ProductsListEvent {
+class PaginationProducts extends ProductsListEvent {
   final String keyCategory;
-
-  GetCategoriesProducts({required this.keyCategory});
+  PaginationProducts({required this.keyCategory});
 }
 
 class GetProductItem extends ProductsListEvent {

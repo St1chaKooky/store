@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:fake_store/feature/product/domain/bloc/filter_category_bloc/filter_bloc.dart';
 import 'package:fake_store/feature/product/domain/bloc/filter_category_bloc/filter_event.dart';
@@ -21,18 +22,20 @@ class ProductsListPage extends StatefulWidget {
 
 class _ProductsListPageState extends State<ProductsListPage> {
   late final FilterBloc blocFilter = context.read<FilterBloc>();
-  late final ProductsListBloc blocProductsList = context.read<ProductsListBloc>();
+  late final ProductsListBloc blocProductsList =
+      context.read<ProductsListBloc>();
   final controller = ScrollController();
   ValueNotifier currentCategories = ValueNotifier('');
   @override
   void initState() {
     super.initState();
     blocFilter.add(GetCategories());
-    blocProductsList.add(PaginationProducts());
-    controller.addListener((){
-      if (controller.position.maxScrollExtent == controller.offset){
-        blocProductsList.add(PaginationProducts());
-      }
+    blocProductsList.add(PaginationProducts(keyCategory: ''));
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+
+          blocProductsList.add(PaginationProducts(keyCategory: currentCategories.value));
+      } 
     });
   }
 
@@ -64,21 +67,20 @@ class _ProductsListPageState extends State<ProductsListPage> {
         padding: const EdgeInsets.all(16),
         controller: controller,
         child: ValueListenableBuilder(
-          valueListenable: currentCategories,
-          builder: (context, value, child) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _categoryBuilder,
-                const SizedBox(
-                  height: 10,
-                ),
-                _listProducts
-              ],
-            );
-          }
-        ),
+            valueListenable: currentCategories,
+            builder: (context, value, child) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _categoryBuilder,
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _listProducts
+                ],
+              );
+            }),
       ),
     );
   }
@@ -108,19 +110,24 @@ class _ProductsListPageState extends State<ProductsListPage> {
                             product: productsList[index],
                           );
                         } else {
-                          return   Center(child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: state.isFull ? const Text('The end') : const CircularProgressIndicator(color: ColorCollection.primary,strokeWidth: 2,),
-                          ),);
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: state.isFull
+                                  ? const Text('The end')
+                                  : const CircularProgressIndicator(
+                                      color: ColorCollection.primary,
+                                      strokeWidth: 2,
+                                    ),
+                            ),
+                          );
                         }
                       },
                       itemCount: productsList.length + 1,
                     ),
                   ),
-                // TODO: Handle this case.
                 UpdateProductItemState() => Container(),
-                // TODO: Handle this case.
-                UpdateCategoryProductState() => Container(),
+
               };
             }),
       );
@@ -144,7 +151,19 @@ class _ProductsListPageState extends State<ProductsListPage> {
                       return ChoiceChip(
                         label: Text(currentCategoriesList[index]),
                         onSelected: (bool value) {
-                          currentCategories.value = currentCategoriesList[index];
+                          if(value) {
+                            log('category');
+                            currentCategories.value =
+                              currentCategoriesList[index];
+                             blocProductsList.add(PaginationProducts(keyCategory: currentCategories.value));
+                          } else {
+                            log('pogination');
+
+                            currentCategories.value ='';
+                            blocProductsList.add(PaginationProducts(keyCategory: ''));
+                          };
+                          
+                        
                           blocFilter.add(
                               EditCategory(index: index, isSelected: value));
                         },

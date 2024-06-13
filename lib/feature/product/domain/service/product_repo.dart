@@ -20,8 +20,6 @@ abstract class ProductRepo {
 
   @GET('products/category/{category}')
   Future<List<Product>> getProductsCategory(
-    @Path('category') String category,
-    @Query('limit') int count,
-    
+    @Path('category') String category, 
     );
 }

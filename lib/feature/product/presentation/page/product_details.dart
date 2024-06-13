@@ -18,6 +18,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   late final ProductsListBloc bloc = context.read<ProductsListBloc>();
+  String category = '';
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         leading: context.canPop()
             ? IconButton(
                 onPressed: () {
-                  bloc.add(PaginationProducts());
+                  bloc.add(PaginationProducts(keyCategory: category));
                   context.pop();
                 },
                 icon: const Icon(Icons.arrow_back_outlined, color: ColorCollection.text,))
@@ -103,8 +104,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 LoadingProductState() => Container(),
                 UpdateProductState() => Container(),
-                // TODO: Handle this case.
-                UpdateCategoryProductState() => Container(),
               };
             }),
       ),

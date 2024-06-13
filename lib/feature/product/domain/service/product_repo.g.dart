@@ -104,12 +104,9 @@ class _ProductRepo implements ProductRepo {
   }
 
   @override
-  Future<List<Product>> getProductsCategory(
-    String category,
-    int count,
-  ) async {
+  Future<List<Product>> getProductsCategory(String category) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': count};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result =

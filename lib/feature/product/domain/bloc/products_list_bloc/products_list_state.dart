@@ -13,8 +13,3 @@ class UpdateProductItemState extends ProductsListState {
   final Product product;
   UpdateProductItemState({required this.product});
 }
-class UpdateCategoryProductState extends ProductsListState {
-  bool isFull;
-  List<Product> productsList;
-  UpdateCategoryProductState({required this.productsList, required this.isFull});
-}

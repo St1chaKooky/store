@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fake_store/feature/product/data/models/product_item.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_event.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_state.dart';
@@ -9,27 +11,30 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
   ProductsListBloc({required this.repo})
       : super(LoadingProductState()) {
     on<PaginationProducts>((event, emit) async {
-        countItemProduct +=5;
-        List<Product> newProductList = await repo.getAllProductsLimit(countItemProduct);
-        if (newProductList.length != productsList.length) {
-          productsList.addAll(newProductList.sublist(countItemProduct-5));
+        List<Product> newProductList = [];
+        
+        if (event.keyCategory == ''){
+          productsList.isEmpty ? countItemProduct = 0 : null;
+          countItemProduct +=4;
+          try {
+            newProductList = await repo.getAllProductsLimit(countItemProduct);
+          if (newProductList.length != productsList.length) {
+          productsList.addAll(newProductList.sublist(countItemProduct-4));
         emit(UpdateProductState(productsList:productsList, isFull: false));
         } else {
          emit(UpdateProductState(productsList: productsList, isFull: true));
         }
-    },);
-
-      on<GetCategoriesProducts>((event, emit) async {
-      countItemProduct +=5;
-      List<Product> newProductList = await repo.getProductsCategory(event.keyCategory,countItemProduct);
-      if (newProductList.length != productsList.length) {
-          productsCategoryList.addAll(newProductList.sublist(countItemProduct-5));
-        emit(UpdateCategoryProductState(productsList:productsCategoryList, isFull: false));
+          } catch (e){
+            log(e.toString());
+          }
+          
         } else {
-         emit(UpdateCategoryProductState(productsList: productsCategoryList, isFull: true));
-        }
+          productsList = [];
+          newProductList = await repo.getProductsCategory(event.keyCategory);
+          emit(UpdateProductState(productsList: newProductList, isFull: true));
+          
+        }  
     },);
-
       on<GetProductItem>((event, emit)async {
         emit(LoadingProductState());
         int id = event.id;
@@ -40,7 +45,6 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
   int countItemProductCategory = 0;
   int countItemProduct = 0;
   List<Product>  productsList = [];
-  List<Product>  productsCategoryList = [];
 
 
 }
