@@ -30,9 +30,12 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
           
         } else {
           productsList = [];
-          newProductList = await repo.getProductsCategory(event.keyCategory);
+          try{
+            newProductList = await repo.getProductsCategory(event.keyCategory);
           emit(UpdateProductState(productsList: newProductList, isFull: true));
-          
+          } catch(e){
+            log(e.toString());
+          } 
         }  
     },);
       on<GetProductItem>((event, emit)async {
