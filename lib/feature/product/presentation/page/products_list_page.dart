@@ -33,7 +33,6 @@ class _ProductsListPageState extends State<ProductsListPage> {
     blocProductsList.add(PaginationProducts(keyCategory: ''));
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
-
           blocProductsList.add(PaginationProducts(keyCategory: currentCategories.value));
       } 
     });

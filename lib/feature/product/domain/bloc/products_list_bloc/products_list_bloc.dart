@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:fake_store/feature/product/data/models/product_item.dart';
+import 'package:fake_store/feature/product/data/product_item.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_event.dart';
 import 'package:fake_store/feature/product/domain/bloc/products_list_bloc/products_list_state.dart';
 import 'package:fake_store/feature/product/domain/service/product_repo.dart';
@@ -30,9 +30,12 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
           
         } else {
           productsList = [];
-          newProductList = await repo.getProductsCategory(event.keyCategory);
+          try{
+            newProductList = await repo.getProductsCategory(event.keyCategory);
           emit(UpdateProductState(productsList: newProductList, isFull: true));
-          
+          } catch(e){
+            log(e.toString());
+          } 
         }  
     },);
       on<GetProductItem>((event, emit)async {

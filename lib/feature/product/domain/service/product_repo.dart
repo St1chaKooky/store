@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fake_store/feature/product/data/models/product_item.dart';
+import 'package:fake_store/feature/product/data/product_item.dart';
 
 import 'package:retrofit/retrofit.dart';
 part 'product_repo.g.dart';
