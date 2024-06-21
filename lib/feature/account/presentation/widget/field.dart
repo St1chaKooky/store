@@ -19,7 +19,7 @@ class _AccountTextFieldState extends State<AccountTextField> {
   Widget build(BuildContext context) {
     return TextField(
       
-      style: theme.bodyLarge,
+      style: theme.bodyLarge!.copyWith(color: ColorCollection.text ),
       controller: widget.textEditingController,
       decoration: InputDecoration(
           labelText: widget.labelText,
@@ -32,7 +32,7 @@ class _AccountTextFieldState extends State<AccountTextField> {
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             borderSide: BorderSide(
-                color: ColorCollection.input,
+                color: ColorCollection.bottomBar,
                 width: 1), // Убираем границу, оставляя только закругления
           ),
           labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color: ColorCollection.text ),

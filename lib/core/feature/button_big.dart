@@ -4,7 +4,7 @@ import 'package:fake_store/theme/collections/colorCollection.dart';
 import 'package:flutter/material.dart';
 
 class MyFilledButton extends StatefulWidget {
-  final FutureOr<void> Function() onTap;
+  final FutureOr<void> Function()? onTap;
   final String text;
 
   const MyFilledButton({
@@ -33,7 +33,7 @@ class _MyFilledButtonState extends State<MyFilledButton> {
     if (_isLoading) return;
     try {
       setState(() => _isLoading = true);
-      await widget.onTap.call();
+      await widget.onTap?.call();
     } finally {
       setState(() => _isLoading = false);
     }  }

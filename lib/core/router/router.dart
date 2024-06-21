@@ -1,5 +1,6 @@
 import 'package:fake_store/feature/account/presentation/account_page.dart';
 import 'package:fake_store/feature/account/presentation/edit_account_page.dart';
+import 'package:fake_store/feature/auth/data/userModel.dart';
 import 'package:fake_store/feature/auth/presentation/auth_page.dart';
 import 'package:fake_store/feature/bottom_bar/bottom_bar.dart';
 import 'package:fake_store/feature/cart/presentation/cart_page.dart';
@@ -22,10 +23,11 @@ abstract class RouteList {
   static const account = _accountPath;
 
   static const _editPath = 'edit';
-  static String edit(String id) => '$_accountPath/$_editPath/$id';
+  static String edit() => '$_accountPath/$_editPath';
 
   static const _productDetailsPath = 'productDetails';
-  static String productDetails(String id) => '$product/$_productDetailsPath/$id';
+  static String productDetails(String id) =>
+      '$product/$_productDetailsPath/$id';
 }
 
 final router = GoRouter(
@@ -74,18 +76,14 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-              path: RouteList.account,
-              builder: (context, state) => AccountPage(),
-              routes: [
-                 GoRoute(
-                  path: '${RouteList._editPath}/:id',
-                  builder: (context, state) {
-                    final id = state.pathParameters['id'];
-                    return EditAccountPage(id: id!);
-                  },
-                )
-              ]
-            ),
+                path: RouteList.account,
+                builder: (context, state) => AccountPage(),
+                routes: [
+                  GoRoute(
+                      path: RouteList._editPath,
+                      builder: (context, state) =>
+                          EditAccountPage(user: state.extra as UserModel))
+                ]),
           ],
         ),
       ],

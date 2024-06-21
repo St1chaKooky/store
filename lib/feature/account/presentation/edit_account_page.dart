@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class EditAccountPage extends StatefulWidget {
- final UserModel user;
+  final UserModel user;
   const EditAccountPage({super.key, required this.user});
 
   @override
@@ -13,11 +13,17 @@ class EditAccountPage extends StatefulWidget {
 }
 
 class _EditAccountPageState extends State<EditAccountPage> {
-  UserModel get userData => widget.user;
+  UserModel get user => widget.user;
+  // late final UserBloc bloc = context.read<UserBloc>();
   late TextEditingController emailControll =
-      TextEditingController(text: userData.email);
+      TextEditingController(text: user.email);
   late TextEditingController usernameControll =
-      TextEditingController(text: userData.username);
+      TextEditingController(text: user.username);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
